@@ -1,0 +1,102 @@
+<p>reactive custom form works!</p>
+<form  [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="container mt-4" style="max-width: 500px; padding: 15px;">
+    <div class="mb-3">
+    
+    <label for="first-name">First Name:</label>
+    <input id="first-name" type="text" formControlName="firstName" class="form-control"  />
+
+    <div *ngIf="signUpForm.get('firstName')?.invalid && submitted" class="text-danger">
+        
+        <div *ngIf="signUpForm.get('firstName')?.errors?.['required']">
+            First name is required
+        </div >
+        <div *ngIf="signUpForm.get('firstName')?.errors?.['minlength']">
+            First name must be 3 character long
+        </div>
+    </div>    
+        
+    </div>
+    
+    <div class="mb-3">
+
+        <label for="last-name">Last Name:</label>
+        <input id="last-name" type="text" formControlName="lastName" class="form-control"/>
+    </div>
+
+      <div class="mb-3">    
+
+        <label for="mobile-no">Mobile no.:</label>
+        <input id="mobile-no" type="text" formControlName="mobile" class="form-control"/>
+        <div *ngIf="signUpForm.get('mobile')?.invalid && submitted" class="text-danger">
+            Mobile number is required.
+        
+        <div *ngIf="signUpForm.get('mobile')?.errors?.['pattern']" class="text-danger">
+            Enter valid mobile number only      
+        </div>
+        <div *ngIf="signUpForm.get('mobile')?.errors?.['minlength']" class="text-danger">
+            Mobile number must be 10 digits.
+        </div>
+        <div *ngIf="signUpForm.get('mobile')?.errors?.['maxlength']" class="text-danger">
+            Max  10 digits mobile number allowed.
+        </div>
+        </div>
+      </div>  
+    
+      <div class="mb-3">
+
+        <label for="address">Address:</label>
+         <textarea name="address"id="address" type="text" formControlName="address" class="form-control"></textarea>
+      </div>
+
+      <div class="mb-3">
+
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" class="form-control"/>
+        <div *ngIf="signUpForm.get('email')?.invalid && submitted" class="text-danger">
+            Email address is required.
+        
+        <div *ngIf="signUpForm.get('email')?.errors?.['email']" class="text-danger">
+            Eneter valid email address
+        </div>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+
+        <label for="wesbite">Personal wesbite:</label>
+        <input id="wesbite" type="url" formControlName="website" class="form-control"/>
+        <div *ngIf="signUpForm.get('website')?.invalid && submitted" class="text-danger">
+            Personal website required.
+        
+        <div *ngIf="signUpForm.get('website')?.errors?.['pattern']" class="text-danger">
+            Enter valid Personal wesbite.
+        </div>
+        </div>
+
+      </div>
+        
+       <div class="mb-3">
+
+        <label for="image">Image</label>
+        <input id="image" type="file" formControlName="image" class="form-control" (change)="onImageChange($event)"/>
+        <div *ngIf="signUpForm.get('image')?.invalid && submitted" class="text-danger">
+            Upload image.
+        <div *ngIF="signUpForm.get('image')?.errors?.['required']" class="text-danger">
+            Image is required
+        </div>
+        <div  *ngIf="signUpForm.get('image')?.errors?.['fileType']" class="text-danger">
+            Only PNG and JPG files are allowed.
+        </div>
+        <div *ngIF="signUpForm.get('image')?.errors?.['fileSize']" class="text-danger">
+            File size must be less than 2MB
+        </div>
+        </div>
+
+       </div>
+        
+
+        <button type="submit" class="btn btn-success me-3"  >Submit form</button>
+        <button type="reset" class="btn btn-danger"  (click)="onReset()">Reset Form</button>
+        
+    
+</form>

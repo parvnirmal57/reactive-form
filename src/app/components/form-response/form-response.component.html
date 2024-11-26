@@ -1,0 +1,61 @@
+<p>form-response works!</p>
+<div class="table-responsive">
+    <h2 class="text-center">Submitted Data</h2>
+    <table class="table table-bordered table-striped mt-4 table-info"  >
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Website</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let submission of formResponses; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ submission.id }}</td>
+
+          <td>
+            <input *ngIf="submission.isEditing" [(ngModel)]="submission.firstName" class="form-control">
+            <span *ngIf="!submission.isEditing">{{submission.firstName}}</span>
+          </td>
+          <td>
+            <input *ngIf="submission.isEditing" [(ngModel)]="submission.lastName" class="form-control">
+            <span *ngIf="!submission.isEditing">{{submission.lastName}}</span>
+          </td>
+          <td>
+            <input *ngIf="submission.isEditing" [(ngModel)]="submission.mobile" class="form-control">
+            <span *ngIf="!submission.isEditing">{{submission.mobile}}</span>
+          </td>
+          <td>
+            <input *ngIf="submission.isEditing" [(ngModel)]="submission.address" class="form-control">
+            <span *ngIf="!submission.isEditing">{{submission.address}}</span>
+          </td>
+          <td>
+            <input *ngIf="submission.isEditing" [(ngModel)]="submission.email" class="form-control">
+            <span *ngIf="!submission.isEditing">{{submission.email}}</span>
+          </td>
+          <td>
+            <input *ngIf="submission.isEditing" [(ngModel)]="submission.website" class="form-control">
+            <span *ngIf="!submission.isEditing">{{submission.website}}</span>
+          </td>
+          <td>
+            <input *ngIf="submission.isEditing" [(ngModel)]="submission.image" class="form-control">
+            <span *ngIf="!submission.isEditing">{{submission.image}}</span>
+          </td>
+        
+          <td>
+            <button *ngIf="!submission.isEditing" (click)="onEdit(submission)" class="btn btn-warning me-3">Edit</button>
+            <button *ngIf="submission.isEditing" (click)="onSave(submission)">Save</button>
+            <button (click)="onDelete(submission.id)" class="btn btn-danger btn-sm">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
